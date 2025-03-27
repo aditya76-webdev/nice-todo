@@ -1,16 +1,22 @@
+import { useState } from "react"
 import { Header } from "./components/Header"
 import { Tabs } from "./components/Tabs"
 import { TodoInput } from "./components/TodoInput"
 import { TodoList } from "./components/TodoList"
+
 function App() {
-  const todos= [
-    {input:"Hello! Add Your first todo.", complete:true},
-    {input:'Get the groceries.', complete:false},
-    {input:'Learn how to web design.', complete:true},
-    {input:'Say hi to gran gran.', complete:true}
-  ]
-  return (
+  // const todos= [
+  //   {input:"Hello! Add Your first todo.", complete:true},
+  //   {input:'Get the groceries.', complete:false},
+  //   {input:'Learn how to web design.', complete:true},
+  //   {input:'Say hi to gran gran.', complete:true}
+  // ]
+  const [todos, setTodos] = useState([{input:"Hello! Add Your first todo.", complete:true}])
+
+  function handleAddTodo(){
     
+  }
+  return (
     <>
       
       <Header todos={todos}/> 

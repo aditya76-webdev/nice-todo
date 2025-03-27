@@ -1,7 +1,6 @@
 
 export function TodoCard(props){
-    const{todoIndex,todos} = props
-    const todo = todos[todoIndex]
+    const{todo} = props
     // console.log(todo)
     return (
         <div className="card todo-item">
@@ -25,5 +24,7 @@ iska fayda ye hai ki hum ek .jsx file mai multiple functions bana sakte hai aur 
 wahi 
 2). 2nd way hai export by default (isme humesha ek hi koi function export ho sakta hai multiple function export nahi ho sakte hai)... isme agar hume custom name dena ho to as use karna hota hai.
 
-2
+    -----------------------------------day-2:--------------------------------------
+    now todos list display karegi each todocard ko to jaisa ki design se pata chala har toocard mai done delete and ek p tag hoga to yaha pe todolist mai done , delete, and p tag hai so hum props ko accordingly daal denge and display kar denge 4 cards
+now humne
  */

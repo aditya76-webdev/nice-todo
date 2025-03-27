@@ -1,5 +1,5 @@
 export function Header(props){ // isme arguments mai jo props diya hai use props propogation bolte hai
-    const {todos} = props // {todos}ise destructuring bolte hai matlab humko jo props mila use destructure karna 
+    const {todos} = props // {todos}ise destructuring bolte hai matlab humko jo props mila use destructure karna
     const todoslength = todos.length; // now humne destructure kiya hai jo bhi prop now use information le sakte hai hum to ise bolte hai using props for our valuable purpose
     const isTaskPlural = todos.length>1; // using props 
     const taskOrTasks = isTaskPlural?'tasks':'task'
