@@ -1,16 +1,17 @@
 import { TodoCard } from "./TodoCard";
 export function TodoList(props) {
     // console.log(todos)
-    const { todos } = props
-    // console.log(todos)
+    const { todos,selectedTab,handleDeleteTodo,handleCompleteTodo } = props
+    // console.log(todos,"i m todos from todolist.jsx")
+    // console.log(todos,selectedTab,handleDeleteTodo,"debugging")
     // const {t} = todos
     // console.log(todos[0])
-    const tab = 'All';
+    const tab = selectedTab;
     const filterTodosList = tab === 'All' ?
         todos :
         tab === 'Open' ?
             todos.filter(val => !val.complete) :
-            todos.filter(val => val.complete)
+            todos.filter(val => val.complete) //completed
     /*
     const todos= [
     {input:"Hello! Add Your first todo.", complete:true},
@@ -23,11 +24,14 @@ export function TodoList(props) {
     return (
         <>
             {filterTodosList.map((todo, todoIndex) => {
+                // console.log(todoIndex,"todoIndex of todoList")
                 return (
                     <TodoCard
                         key={todoIndex}
-                        todoIndex={todoIndex}
-                        todo={todo} />
+                        todoIndex={todos.findIndex(val=>val.input==todo.input)}
+                        todo={todo}
+                        handleDeleteTodo = {handleDeleteTodo}
+                        handleCompleteTodo={handleCompleteTodo}/>
                 )
             })}
         </>

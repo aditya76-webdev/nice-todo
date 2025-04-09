@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Header } from "./components/Header"
 import { Tabs } from "./components/Tabs"
 import { TodoInput } from "./components/TodoInput"
@@ -11,22 +11,61 @@ function App() {
   //   {input:'Learn how to web design.', complete:true},
   //   {input:'Say hi to gran gran.', complete:true}
   // ]
-  const [todos, setTodos] = useState([{input:"Hello! Add Your first todo.", complete:true}])
-
-  function handleAddTodo(){
+  const [todos, setTodos] = useState([])
+  // console.log(todos,"i m todos from app.jsx")
+  function handleAddTodo(newTodo){
+    const newTodoList =[...todos,{input:newTodo}]
+    setTodos(newTodoList)
+    handleSaveData(newTodoList)
     
   }
+  function handleCompleteTodo(index){
+    let newTodoList = [... todos]
+    let completedTodo = todos[index]
+    completedTodo['complete']= true
+    newTodoList[index] = completedTodo
+    setTodos(newTodoList)
+    handleSaveData(newTodoList)
+  }
+  function handleDeleteTodo(index){
+    console.log( index, "finally calling me wowo");
+    console.log(index)
+    let newTodoList = todos.filter((val, valIndex) => {
+        
+        return valIndex !== index;
+    });
+
+    setTodos(newTodoList);
+    handleSaveData(newTodoList)
+  };
+
+  
+  
+  const [selectedTab, setSelectedTab] = useState('Open')
+  // console.log(todos,"todo")
+  function handleSaveData(currTodos){
+    localStorage.setItem('todo-app',JSON.stringify({todos:currTodos}))
+  }
+  useEffect(() => {
+    if(!localStorage || !localStorage.getItem('todo-app')){return}
+    console.log("here")
+    let db = JSON.parse(localStorage.getItem('todo-app'))
+    setTodos(db.todos)
+    }
+  , [])
+  
+
   return (
     <>
       
-      <Header todos={todos}/> 
-      <Tabs todos ={todos}/>
-      <TodoList todos ={todos}/>
-      <TodoInput todos ={todos}/>
+      <Header todos={todos}/>
+      <Tabs todos ={todos} selectedTab={selectedTab} setSelectedTab={setSelectedTab}/>
+      <TodoList handleCompleteTodo={handleCompleteTodo} handleDeleteTodo={handleDeleteTodo} todos ={todos} selectedTab={selectedTab} />
+      <TodoInput todos ={todos}  handleAddTodo={handleAddTodo}/>
     </>
   )
-}
 
+}
 export default App
 /* trunk-ignore-all(prettier) */
 /*

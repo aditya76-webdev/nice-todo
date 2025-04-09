@@ -1,6 +1,9 @@
 
 export function Tabs(props){
-    const {todos} = props
+    const {todos,selectedTab, setSelectedTab} = props
+    // const setSelectedTab = setSelectedTab
+    // console.log(todos,selectedTab,setSelectedTab,"i m from tabs")
+    // console.log(setSelectedTab,"i m from tabs")
     const tabs = ['All','Open','Completed'];
 
     return(
@@ -8,10 +11,14 @@ export function Tabs(props){
             {tabs.map((tab,tabIndex)=>{
                 const numOfTasks = tab=='All'?todos.length:tab=='Open'?todos.filter(val=>!val.complete).length:todos.filter(val=>val.complete).length
             return (
-                <button key={tabIndex} className="tab-button">
+                <button key={tabIndex} onClick={()=>{
+                    setSelectedTab(tab)
+                    console.log(tab,"Hello tabs")
+                }} className={"tab-button " + (tab===selectedTab? 'tab-selected':' ')}>
                     <h4>{tab} <span>({numOfTasks})</span></h4>
                 </button>
             )})}
+            <hr/>
         </nav>
     )
 }
